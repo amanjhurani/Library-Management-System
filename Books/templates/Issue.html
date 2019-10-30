@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<section class="intro-single">
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-6">
+	<div class="content-section">
+		{% for bok in obj %}
+		<table class="table">
+			<thead class="thead-dark">
+    <tr>
+      <th scope="col">ISBN Number</th>
+      <th scope="col">Book Title</th>
+      <th scope="col">Author Name</th>
+    </tr>
+  </thead>
+  			<tbody>
+			<tr>
+				<th scope="row">{{bok.BookISBN}}</th>
+				<td>{{bok.BookTitle}}</td>
+				<td>{{bok.BookAuthor}}</td>
+			</tr>
+  			</tbody>
+		</table>
+
+		{% endfor %}
+		<form method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+
+			<fieldset class="form-group">
+				<legend class="border-bottom mb-4">Issue a Book</legend>
+				{{ form|crispy }}
+			</fieldset>
+
+			       <div class="col-md-12">
+                    <button type="submit" class="btn btn-a">Issue</button>
+                  </div>
+
+		</form>
+	</div>
+			</div>
+		</div>
+</div></section>
+
+{% endblock %}
+

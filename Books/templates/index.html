@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<form class="form-inline my-2 my-lg-0" method="post" action="/search/">
+        {% csrf_token %}
+      <input class="form-control mr-sm-2" name="srh" type="search" placeholder="Search by Title or ISBN" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
+      {% if messages %}
+      <ul class="messages">
+          {% for k in messages %}
+          <li style="color:red">{{ k }}</li>
+          {% endfor %}
+      </ul>
+      {% endif %}
+        <br>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ISBN Number</th>
+      <th scope="col">Book Title</th>
+      <th scope="col">Author Name</th>
+      <th scope="col">Issue</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% if sr %}
+  {% for book in sr %}
+    <tr>
+      <th scope="row">{{book.BookISBN}}</th>
+      <td>{{book.BookTitle}}</td>
+      <td>{{book.BookAuthor}}</td>
+        <td><a href="{% url 'book_issue' book.pk %}" class="link-a">Issue
+            <span class="ion-ios-arrow-forward"></span></a></td>
+    </tr>
+  {% endfor %}
+  {% endif %}
+  </tbody>
+</table>
+
+{% endblock %}

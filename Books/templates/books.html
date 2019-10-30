@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ISBN Number</th>
+      <th scope="col">Book Title</th>
+      <th scope="col">Author Name</th>
+      <th scope="col">Issue</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for book in bookObj %}
+    <tr>
+      <th scope="row">{{book.BookISBN}}</th>
+      <td>{{book.BookTitle}}</td>
+      <td>{{book.BookAuthor}}</td>
+      <td><a href="{% url 'book_issue' book.pk %}" class="link-a">Issue
+                    <span class="ion-ios-arrow-forward"></span>
+      </a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
